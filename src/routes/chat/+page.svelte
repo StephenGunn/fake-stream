@@ -2,7 +2,8 @@
     import { emojis }     from "$lib/emoji"
     import { quotes }     from "$lib/quotes"
     import { get_random } from "$lib/functions"
-    import { onMount } from "svelte"
+    import { onMount }    from "svelte"
+    import { fly }        from "svelte/transition"
 
     // vars
     let chat_box: HTMLElement
@@ -46,7 +47,7 @@
     </div>
     <div class="room" bind:this={chat_box}>
         {#each chat as message}
-            <div class="message">
+            <div class="message" in:fly={{duration: 500, x: 50}}>
                 <div class="face">
                     {message.Emoji}
                 </div>
