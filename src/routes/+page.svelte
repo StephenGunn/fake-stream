@@ -12,7 +12,7 @@
         </li>
         <li>
             <a href="/chat">
-                CHAT: generates a fake chat room
+                CHAT: generates a fake chat room, 20% chance of a new message every 10 seconds 
             </a>
         </li>
     </ul>
