@@ -55,6 +55,8 @@
                     <img
                         src="/{image_url(message.Author)}.png"
                         alt="{message.Author} avatar"
+                        width="45"
+                        height="45"
                     >
                 </div>
                 <div class="quote">
@@ -104,9 +106,7 @@
         display: flex
         gap: 1rem
         max-width: 600px
-        .face img
-            width: 2.5rem
-            height: 2.5rem
+
             
         .quote
             .author
