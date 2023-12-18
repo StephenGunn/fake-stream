@@ -1,7 +1,10 @@
 <script lang="ts">
     import { emojis }     from "$lib/emoji"
     import { quotes }     from "$lib/quotes"
-    import { get_random } from "$lib/functions"
+    import {
+        get_random,
+        image_url
+    }                     from "$lib/functions"
     import { onMount }    from "svelte"
     import { fly }        from "svelte/transition"
 
@@ -14,7 +17,7 @@
     }[] = [
         {
             Emoji: "😎",
-            Author: 'Welcome',
+            Author: 'Mario',
             Quote: 'Hello streamer! Welcome to your live chat room!'
         }
     ]
@@ -49,14 +52,22 @@
         {#each chat as message}
             <div class="message" in:fly={{duration: 500, x: 50}}>
                 <div class="face">
-                    {message.Emoji}
+                    <img
+                        src="/{image_url(message.Author)}.png"
+                        alt="{message.Author} avatar"
+                        width="45"
+                        height="45"
+                    >
                 </div>
                 <div class="quote">
                     <div class="author">
                         {message.Author}
                     </div>
                     <div class="text">
-                        {message.Quote}
+                        {message.Quote} 
+                        {#if Math.random() > 0.5}
+                            {message.Emoji}
+                        {/if}
                     </div>
                 </div>
             </div>
@@ -95,8 +106,8 @@
         display: flex
         gap: 1rem
         max-width: 600px
-        .face
-            font-size: 1.5rem
+
+            
         .quote
             .author
                 font-size: 1rem

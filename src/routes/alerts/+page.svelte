@@ -1,9 +1,12 @@
 <script lang="ts">
     import { emojis }     from "$lib/emoji"
     import { quotes }     from "$lib/quotes"
-    import { get_random } from "$lib/functions"
+    import {
+        get_random,
+        image_url
+    }                     from "$lib/functions"
     import { fly }        from "svelte/transition"
-    import { onMount } from "svelte"
+    import { onMount }    from "svelte"
 
     // vars
     let alert_on_screen: boolean = false
@@ -28,7 +31,7 @@
         alert_on_screen = true
         alert_timeout = setTimeout(async ()=> {
             alert_on_screen = false
-        }, 10000)
+        }, 15000)
     }
 
     onMount(()=> {
@@ -45,7 +48,12 @@
 {#if alert_on_screen}
     <div class="alert" transition:fly={{duration: 400, x: -50, y: -50}}>
         <div class="face">
-            {emoji}
+            <img
+                src="/{image_url(quote.Author)}.png"
+                alt="{quote.Author} avatar"
+                width="120"
+                height="120"
+            >
         </div>
         <div class="quote">
             <div class="author">
@@ -53,6 +61,11 @@
             </div>
             <div class="text">
                 {quote.Quote}
+                {#if Math.random() > 0.5}
+                    {emoji} {emoji} {emoji}
+                {:else}
+                    {emoji}
+                {/if}
             </div>
         </div>
     </div>
@@ -72,7 +85,10 @@
     gap: 2rem
     max-width: 600px
     .face
-        font-size: 3rem
+        flex-shrink: 0
+        img
+            width: 120px
+            height: 120px
     .quote
         .author
             font-size: 1.2rem
@@ -80,5 +96,6 @@
             color: #d62828
 
         .text
-            font-size: 1.3rem
+            font-size: 1.6rem
+            margin-right: 1rem
 </style>
